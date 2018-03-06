@@ -14,6 +14,6 @@ public class HelloRest {
 	
 	@RequestMapping(value = "/ohayou", method = RequestMethod.GET)
 	public String ohayouMessage() {
-		return " \\u304a\\u306f\\u3088\\u3046 @ " + new java.util.Date();
+		return "\u304a\u306f\u3088\u3046 @ " + new java.util.Date();
 	}
 }
