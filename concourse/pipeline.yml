@@ -1,0 +1,27 @@
+resources:
+- name: hello-spring-boot
+  type: git
+  source:
+    uri: https://github.com/pivotal-jleung/hello-spring-boot
+    branch: master
+- name: resource-deploy-spring-boot
+  type: cf
+  source:
+    api: ((cf-api))
+    username: ((cf-username))
+    password: ((cf-password))
+    organization: ((cf-org))
+    space: ((cf-space))
+
+jobs:
+- name: job-deploy-app
+  serial: true
+  plan:
+  - {get: hello-spring-boot, trigger: true}
+  - task: build
+    privileged: true
+    file: hello-spring-boot/concourse/build.yml
+  - put: resource-deploy-spring-boot
+    params:
+      mainfest: hello-spring-boot/manifest.yml
+      path: built-project/hello-spring-boot.jar
