@@ -1,0 +1,8 @@
+applications:
+- name: hello-spring-boot
+  disk_quota: 1G
+  instances: 2
+  memory: 1G
+  routes:
+  - route: hello-spring-boot.apps.ohayou.site
+  stack: cflinuxfs2
